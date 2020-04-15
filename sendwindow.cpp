@@ -25,5 +25,5 @@ SendWindow::SendWindow(QWidget *parent)
 
 void SendWindow::handleButton()
 {
-
+    area->setStyleSheet("background-color:white;");
 }
