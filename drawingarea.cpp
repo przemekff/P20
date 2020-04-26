@@ -2,7 +2,8 @@
 
 DrawingArea::DrawingArea(QWidget *parent) : QWidget(parent)
 {
-    image.fill(qRgb(0, 0, 0));
+    image = QImage(600,400,QImage::Format_RGB32);
+    image.fill(qRgb(255,255,255));
 }
 
 void DrawingArea::mousePressEvent(QMouseEvent *event)
@@ -15,14 +16,26 @@ void DrawingArea::mouseReleaseEvent(QMouseEvent *event)
 {
     if (event->button() & Qt::LeftButton)
         endPoint = event->pos();
-    repaint();
+    drawLineTo();
+}
+
+void DrawingArea::drawLineTo()
+{
+    QPainter painter(&image);
+    painter.drawLine(startPoint, endPoint);
+    update();
 }
 
 void DrawingArea::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-    QRect rect = event->rect();
+    rect = event->rect();
     painter.drawImage(rect, image, rect);
-    painter.drawLine(startPoint, endPoint);
 
+}
+
+void DrawingArea::clearScreen()
+{
+    image.fill(qRgb(255,255,255));
+    update();
 }
