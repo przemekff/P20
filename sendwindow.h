@@ -18,7 +18,6 @@ public:
 
 private slots:
     void handleButton();
-    bool* collectData();
 
 private:
     QPushButton *quitBtn;

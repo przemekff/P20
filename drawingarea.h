@@ -13,7 +13,7 @@
 
 class DrawingArea : public QWidget
 {
-Q_OBJECT
+
 public:
     DrawingArea(QWidget *parent = 0);
     void mousePressEvent(QMouseEvent *event) override;
@@ -23,9 +23,6 @@ public:
     void clearScreen();
     void serialize(int point, bool *data);
     void serializeAll ();
-
-signals:
-    bool* dataCollected();
 
 private:
     QPoint startPoint;
