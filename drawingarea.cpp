@@ -17,6 +17,7 @@ void DrawingArea::mouseReleaseEvent(QMouseEvent *event)
     if (event->button() & Qt::LeftButton)
         endPoint = event->pos();
     drawLineTo();
+    serializeAll();
 }
 
 void DrawingArea::drawLineTo()
@@ -38,4 +39,26 @@ void DrawingArea::clearScreen()
 {
     image.fill(qRgb(255,255,255));
     update();
+}
+
+void DrawingArea::serialize(int point, bool *data)
+{
+    for(int i=7;i>=0;i--)
+    {
+        if(point%2 == 0)
+            data[i] = 0;
+        else
+            data[i] = 1;
+        point /= 2;
+
+    }
+}
+
+void DrawingArea::serializeAll()
+{
+    serialize(startPoint.rx(),sCoordinateX);
+    serialize(startPoint.ry(),sCordinateY);
+    serialize(endPoint.rx(),eCoordinateX);
+    serialize(endPoint.ry(),eCordinateY);
+
 }
