@@ -6,11 +6,6 @@ ReceiveWindow::ReceiveWindow(QWidget *parent) : QWidget(parent)
 {
     image = QImage(600,400,QImage::Format_RGB32);
     image.fill(qRgb(255,255,255));
-    startPoint.setX(44);
-    startPoint.setY(44);
-    endPoint.setX(120);
-    endPoint.setY(120);
-    drawLineTo();
     rThread.start();
     connect(&rThread, SIGNAL(readingFinished()), this, SLOT(receiveData()));
 }
@@ -31,12 +26,11 @@ void ReceiveWindow::drawLineTo()
 
 void ReceiveWindow::receiveData()
 {
-    setSX(rThread.getSX());
-    setSY(rThread.getSY());
-    setEX(rThread.getEX());
-    setEY(rThread.getEY());
-    update();
-    qDebug()<<"debug";
+    startPoint.setX(rThread.getSX());
+    startPoint.setY(rThread.getSY());
+    endPoint.setX(rThread.getEX());
+    endPoint.setY(rThread.getEY());
+    drawLineTo();
 }
 
 void ReceiveWindow::setSX(int c)

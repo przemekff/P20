@@ -12,9 +12,11 @@ void DrawingArea::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() & Qt::LeftButton)
         startPoint = event->pos();
+    qDebug()<< "startpoint X:"<<startPoint.rx()<<"startPoint Y:"<<startPoint.ry();
     serializeAll();
     sThread.setData(sCoordinateX,sCoordinateY);
     sThread.start();
+    sharedPins[20]=1;
 }
 
 void DrawingArea::mouseReleaseEvent(QMouseEvent *event)
@@ -23,6 +25,11 @@ void DrawingArea::mouseReleaseEvent(QMouseEvent *event)
         endPoint = event->pos();
     drawLineTo();
     serializeAll();
+    sThread.setData(eCoordinateX,eCoordinateY);
+    sThread.start();
+    sharedPins[20]=0;
+
+
 }
 
 void DrawingArea::drawLineTo()
@@ -48,7 +55,7 @@ void DrawingArea::clearScreen()
 
 void DrawingArea::serialize(int point, bool *data)
 {
-    for(int i=7;i>=0;i--)
+    for(int i=9;i>=0;i--)
     {
         if(point%2 == 0)
             data[i] = 0;

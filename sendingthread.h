@@ -2,6 +2,8 @@
 #define SENDINGTHREAD_H
 #include <sharedPins.h>
 #include <QThread>
+#include <QMutex>
+#include <QDebug>
 
 class SendingThread:public QThread
 {

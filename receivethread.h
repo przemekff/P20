@@ -1,6 +1,8 @@
 #ifndef RECEIVETHREAD_H
 #define RECEIVETHREAD_H
 #include <QThread>
+#include <QMutex>
+#include <unistd.h>
 #include <sharedPins.h>
 
 
