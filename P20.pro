@@ -18,13 +18,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     drawingarea.cpp \
     main.cpp \
+    receivethread.cpp \
     receivewindow.cpp \
-    sendwindow.cpp
+    sendingthread.cpp \
+    sendwindow.cpp \
+    sharedPins.cpp
 
 HEADERS += \
     drawingarea.h \
+    receivethread.h \
     receivewindow.h \
-    sendwindow.h
+    sendingthread.h \
+    sendwindow.h \
+    sharedPins.h
 
 FORMS +=
 

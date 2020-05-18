@@ -1,9 +1,9 @@
 #include "sendwindow.h"
 #include "receivewindow.h"
-
-
+#include "drawingarea.h"
 #include <QApplication>
 #include <QWidget>
+
 
 int main(int argc, char *argv[])
 {
@@ -18,5 +18,7 @@ int main(int argc, char *argv[])
     r.resize(600, 400);
     r.setWindowTitle("Receive Window");
     r.show();
+
+
     return a.exec();
 }

@@ -7,6 +7,7 @@
 #include <QImage>
 #include <QSize>
 #include <QDebug>
+#include <sendingthread.h>
 
 
 
@@ -22,17 +23,17 @@ public:
     void drawLineTo();
     void clearScreen();
     void serialize(int point, bool *data);
-    void serializeAll ();
-
+    void serializeAll();
 private:
+    SendingThread sThread;
     QPoint startPoint;
     QPoint endPoint;
     QImage image;
     QRect rect;
-    bool sCoordinateX[8];
-    bool sCordinateY[8];
-    bool eCoordinateX[8];
-    bool eCordinateY[8];
+    bool sCoordinateX[10];
+    bool sCoordinateY[10];
+    bool eCoordinateX[10];
+    bool eCoordinateY[10];
 
 
 };

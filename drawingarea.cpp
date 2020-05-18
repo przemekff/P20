@@ -1,4 +1,6 @@
 #include "drawingarea.h"
+#include "sharedPins.h"
+
 
 DrawingArea::DrawingArea(QWidget *parent) : QWidget(parent)
 {
@@ -10,6 +12,9 @@ void DrawingArea::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() & Qt::LeftButton)
         startPoint = event->pos();
+    serializeAll();
+    sThread.setData(sCoordinateX,sCoordinateY);
+    sThread.start();
 }
 
 void DrawingArea::mouseReleaseEvent(QMouseEvent *event)
@@ -54,11 +59,12 @@ void DrawingArea::serialize(int point, bool *data)
     }
 }
 
+
 void DrawingArea::serializeAll()
 {
     serialize(startPoint.rx(),sCoordinateX);
-    serialize(startPoint.ry(),sCordinateY);
+    serialize(startPoint.ry(),sCoordinateY);
     serialize(endPoint.rx(),eCoordinateX);
-    serialize(endPoint.ry(),eCordinateY);
+    serialize(endPoint.ry(),eCoordinateY);
 
 }
