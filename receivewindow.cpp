@@ -1,6 +1,5 @@
 #include "receivewindow.h"
-#include "sharedPins.h"
-#include <cmath>
+
 
 ReceiveWindow::ReceiveWindow(QWidget *parent) : QWidget(parent)
 {
@@ -8,6 +7,7 @@ ReceiveWindow::ReceiveWindow(QWidget *parent) : QWidget(parent)
     image.fill(qRgb(255,255,255));
     rThread.start();
     connect(&rThread, SIGNAL(readingFinished()), this, SLOT(receiveData()));
+    connect(&rThread, SIGNAL(clearBtnSignal()),this, SLOT(clearScreen()));
 }
 
 void ReceiveWindow::paintEvent(QPaintEvent *event)
@@ -32,6 +32,13 @@ void ReceiveWindow::receiveData()
     endPoint.setY(rThread.getEY());
     drawLineTo();
 }
+void ReceiveWindow::clearScreen()
+{
+
+    image.fill(qRgb(255,255,255));
+    update();
+}
+
 
 void ReceiveWindow::setSX(int c)
 {

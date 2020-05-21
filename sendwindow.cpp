@@ -10,11 +10,14 @@ SendWindow::SendWindow(QWidget *parent)
       quitBtn = new QPushButton("Quit", this);
       connect(quitBtn, &QPushButton::clicked, qApp, &QApplication::quit);
 
-      clearBtn = new QPushButton("Clear", this);
-      connect(clearBtn, SIGNAL (released()), this, SLOT (handleButton()));
-
       area = new DrawingArea(this);
       area->setStyleSheet("background-color:white;");
+
+      clearBtn = new QPushButton("Clear", this);
+      connect(clearBtn, SIGNAL (released()), this, SLOT (handleButton()));
+      connect(clearBtn, SIGNAL(released()), area, SLOT (handleClearButton()));
+
+
 
       layout->addWidget(area,0,0);
       layout->addWidget(clearBtn, 0,0);

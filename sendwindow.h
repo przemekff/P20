@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QApplication>
-#include <QFrame>
 #include <QVBoxLayout>
 #include <QPushButton>
 #include "drawingarea.h"
@@ -17,6 +16,7 @@ public:
     explicit SendWindow(QWidget *parent = 0);    
 
 private slots:
+    //slot performing operation after the clearBtn is clicked
     void handleButton();
 
 private:

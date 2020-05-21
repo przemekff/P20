@@ -1,9 +1,9 @@
 #include "receivethread.h"
-#include <QDebug>
-#include <cmath>
+
 
 receiveThread::receiveThread()
 {
+  //setting initial values to zero to avoid drawing line before the data is sent
   for (int i=0; i<=9; i++)
   {
       sCoordinateX[i]=0;
@@ -18,8 +18,12 @@ void receiveThread::run()
     QMutex mutex;
     while(1)
     {
-       if(sharedPins[20]==1)
+       if(sharedPins[10]==1)
+           emit clearBtnSignal();
+       else
        {
+        if(sharedPins[20]==1)//case where the starting point is being sent
+        {
 
            for(int i=0; i<=9;i++)
            {
@@ -29,9 +33,9 @@ void receiveThread::run()
                sCoordinateY[i] = sharedPins[i+10];
                mutex.unlock();
            }
-       }
-       else
-       {
+        }
+        else//case where the ending point is being sent
+        {
 
            for(int i=0; i<=9;i++)
            {
@@ -42,6 +46,7 @@ void receiveThread::run()
            }
 
            emit readingFinished();
+        }
        }
      usleep(10);
     }

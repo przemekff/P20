@@ -9,6 +9,8 @@
 #include <QPainter>
 #include <receivethread.h>
 #include <drawingarea.h>
+#include <cmath>
+#include "sharedPins.h"
 
 class ReceiveWindow : public QWidget
 {
@@ -16,13 +18,23 @@ class ReceiveWindow : public QWidget
 public:
     explicit ReceiveWindow(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
+
+    //function for drawing line between two QPoints
     void drawLineTo();
+
+    //mutators for attributes
     void setSX(int c);
     void setSY(int c);
     void setEX(int c);
     void setEY(int c);
+
 public slots:
+
+    //function to be called after having read the data from sharedPins
     void receiveData();
+
+    void clearScreen();
+
 private:
     receiveThread rThread;
     int sCoordinateX;

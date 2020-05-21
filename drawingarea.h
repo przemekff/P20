@@ -15,15 +15,33 @@
 class DrawingArea : public QWidget
 {
 
+Q_OBJECT
+
 public:
+    //constructor
     DrawingArea(QWidget *parent = 0);
+
+    //overriding the default functions for handling events
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
+
+    //function for drawing line between two QPoints
     void drawLineTo();
+
+    //replacing the image with a blank one
     void clearScreen();
+
+    /*
+     converting int to array of bools
+     @param point The int to be converted
+     @param data The target array
+    */
     void serialize(int point, bool *data);
-    void serializeAll();
+
+public slots:
+    void handleClearButton();
+
 private:
     SendingThread sThread;
     QPoint startPoint;
